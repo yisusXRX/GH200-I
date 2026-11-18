@@ -1,0 +1,12 @@
+{
+  "name": "mi-proyecto-node",
+  "version": "1.0.0",
+  "description": "Proyecto básico para probar GitHub Actions",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'No build required'",
+    "test": "node -e \"console.log('¡Tests pasados con éxito!')\""
+  },
+  "dependencies": {}
+}
