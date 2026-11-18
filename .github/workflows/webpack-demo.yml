@@ -1,0 +1,49 @@
+name: Webpack Build and Artifact Demo
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Instalar dependencias (incluyendo Webpack)
+        run: npm install
+
+      - name: Ejecutar Webpack para generar el build
+        run: npm run build
+
+      - name: Subir artefacto generado (dist/)
+        uses: actions/upload-artifact@v4
+        with:
+          name: webpack-bundle-artifact
+          path: dist/
+
+  consume-artifact:
+    needs: build # Este job espera a que termine el job 'build' con éxito
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el artefacto previamente subido
+        uses: actions/download-artifact@v4
+        with:
+          name: webpack-bundle-artifact
+          path: downloaded-dist/
+
+      - name: Verificar que el archivo existe y mostrar su contenido
+        run: |
+          echo "Contenido de la carpeta descargada:"
+          ls -la downloaded-dist/
+          echo "--- Contenido del bundle.js ---"
+          cat downloaded-dist/bundle.js
