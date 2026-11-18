@@ -1,12 +1,13 @@
 {
-  "name": "mi-proyecto-node",
+  "name": "mi-proyecto-webpack",
   "version": "1.0.0",
-  "description": "Proyecto básico para probar GitHub Actions",
-  "main": "server.js",
+  "description": "Prueba de Webpack y Artifacts en GitHub Actions",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "echo 'No build required'",
-    "test": "node -e \"console.log('¡Tests pasados con éxito!')\""
+    "build": "webpack --mode production"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
 }
