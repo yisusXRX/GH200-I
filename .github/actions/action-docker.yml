@@ -1,0 +1,18 @@
+name: "Ejemplo Docker"
+description: "Ejecuta la acción dentro de un contenedor Docker"
+
+inputs:
+  nombre:
+    description: "Nombre para el saludo"
+    required: false
+    default: "equipo"
+
+outputs:
+  resultado:
+    description: "Mensaje generado dentro del contenedor"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.nombre }}
