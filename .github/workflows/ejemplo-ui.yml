@@ -1,0 +1,44 @@
+name: Ejecución manual con inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      nombre:
+        description: "Nombre que se enviará a la acción"
+        required: true
+        default: "equipo"
+        type: string
+      entorno:
+        description: "Entorno de ejecución"
+        required: true
+        default: "dev"
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+      modo_verbose:
+        description: "Activar salida detallada"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  ejecutar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código del repositorio
+        uses: actions/checkout@v4
+
+      - name: Mostrar valores introducidos en la UI
+        shell: bash
+        run: |
+          echo "Nombre: ${{ inputs.nombre }}"
+          echo "Entorno: ${{ inputs.entorno }}"
+          echo "Modo verbose: ${{ inputs.modo_verbose }}"
+
+      - name: Invocar acción Docker con el input
+        uses: ./.github/actions/action-docker
+        with:
+          nombre: ${{ inputs.nombre }}
