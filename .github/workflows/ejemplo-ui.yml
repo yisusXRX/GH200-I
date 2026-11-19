@@ -22,6 +22,14 @@ on:
         required: false
         default: false
         type: boolean
+      lista:
+         description: "Lista valores"
+         required: true
+         type: choice
+         options:
+           - SI
+           - NO
+           - QUIZAS
 
 jobs:
   ejecutar:
