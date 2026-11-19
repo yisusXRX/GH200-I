@@ -1,0 +1,16 @@
+name: "Ejemplo JavaScript"
+description: "Acción ejecutada directamente en Node.js"
+
+inputs:
+  nombre:
+    description: "Nombre para el saludo"
+    required: false
+    default: "equipo"
+
+outputs:
+  resultado:
+    description: "Mensaje generado por JS"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
