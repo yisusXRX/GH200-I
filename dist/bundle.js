@@ -1,0 +1,1 @@
+console.log("¡Hola desde el archivo empaquetado por Webpack en GitHub Actions!");
