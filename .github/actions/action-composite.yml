@@ -1,0 +1,24 @@
+name: "Ejemplo Composite"
+description: "Ejecuta un script y devuelve un output"
+
+inputs:
+  nombre:
+    description: "Nombre para el saludo"
+    required: false
+    default: "equipo"
+
+outputs:
+  resultado:
+    description: "Mensaje generado"
+    value: ${{ steps.paso-script.outputs.resultado }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Ejecutar lógica
+      id: paso-script
+      shell: bash
+      run: |
+        MSG="Hola, ${{ inputs.nombre }}"
+        echo "$MSG"
+        echo "resultado=$MSG" >> "$GITHUB_OUTPUT"
